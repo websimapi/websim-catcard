@@ -62,11 +62,15 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                     className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100" 
                     onClick={e => e.stopPropagation()}
                 >
-                    <div className="relative shrink-0 bg-gray-100 flex items-center justify-center">
+                    <div className="relative shrink-0 flex items-center justify-center overflow-hidden" style={{
+                        backgroundImage: 'url("cat_paw_pattern.png")',
+                        backgroundSize: '120px',
+                        backgroundRepeat: 'repeat'
+                    }}>
                         <img 
                             src={imageUrl} 
                             alt={name} 
-                            className="w-full h-auto max-h-[50vh] object-contain" 
+                            className="w-full h-auto max-h-[50vh] object-contain relative z-0" 
                         />
                         <button 
                             onClick={onClick}
@@ -127,7 +131,11 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
             onClick={onClick}
             className="h-full bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border border-transparent hover:border-peach group flex flex-col"
         >
-            <div className="w-full flex-1 overflow-hidden bg-lavender relative min-h-0">
+            <div className="w-full flex-1 overflow-hidden relative min-h-0" style={{
+                backgroundImage: 'url("cat_paw_pattern.png")',
+                backgroundSize: '80px',
+                backgroundRepeat: 'repeat'
+            }}>
                 <img 
                     src={imageUrl} 
                     alt={name} 
