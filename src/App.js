@@ -9,7 +9,7 @@ window.App = function() {
         <div className="h-screen w-full flex flex-col overflow-hidden bg-cream">
             {/* Header */}
             <header className="bg-white shadow-sm shrink-0 z-40">
-                <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+                <div className="max-w-6xl mx-auto px-4 h-14 md:h-16 flex items-center justify-between">
                     <div 
                         className="flex items-center gap-2 cursor-pointer shrink-0" 
                         onClick={() => setView('create')}
