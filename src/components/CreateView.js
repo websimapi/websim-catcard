@@ -1,8 +1,20 @@
 const CAT_BREEDS = [
-    "Persian", "Siamese", "Maine Coon", "British Shorthair", 
-    "Ragdoll", "Bengal", "Scottish Fold", "Sphynx", 
-    "Tabby", "Calico", "Tuxedo", "Orange Tabby", "Russian Blue",
-    "Norwegian Forest", "Bombay", "Munchkin", "Ural Rex"
+    "Abyssinian", "American Bobtail", "American Burmese", "American Curl", 
+    "American Shorthair", "American Wirehair", "Aphrodite Giant", "Australian Mist", 
+    "Balinese", "Bengal", "Birman", "Bombay", "British Longhair", 
+    "British Shorthair", "Calico", "Ceylon", "Chantilly-Tiffany", 
+    "Chartreux", "Chausie", "Chinese Li Hua (Dragon Li)", "Cornish Rex", 
+    "Cow Cat", "Devon Rex", "Donskoy", "Egyptian Mau", "European Burmese", 
+    "European Shorthair", "Havana Brown", "Highlander", "Himalayan", 
+    "Japanese Bobtail", "Kao Manee", "Korat", "Kurilian Bobtail", 
+    "LaPerm", "Lykoi", "Maine Coon", "Manx", "Munchkin", 
+    "Nebelung", "Neva Masquerade", "Norwegian Forest", "Ocicat", 
+    "Orange Tabby", "Oriental Shorthair", "Persian", "Pixie-bob", 
+    "Ragdoll", "Russian Blue", "Scottish Fold", "Selkirk Rex", 
+    "Serengeti", "Siamese", "Siberian", "Singapura", "Snowshoe", 
+    "Somali", "Sphynx", "Tabby", "Tonkinese", "Toyger", 
+    "Turkish Angora", "Turkish Van", "Tuxedo", "Ukrainian Levkoy", 
+    "Ural Rex"
 ];
 
 const IMAGE_STYLES = [
