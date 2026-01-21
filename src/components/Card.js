@@ -63,9 +63,9 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
 
     if (expanded) {
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" onClick={onClick}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm print:bg-transparent print:p-0 print:block" onClick={onClick}>
                 <div 
-                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100 print-container" 
+                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100 print-container print-remove-scroll" 
                     onClick={e => e.stopPropagation()}
                 >
                     <div className="relative shrink-0 flex items-center justify-center overflow-hidden" style={{
@@ -76,11 +76,11 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                         <img 
                             src={imageUrl} 
                             alt={name} 
-                            className="w-full h-auto max-h-[50vh] object-contain relative z-0" 
+                            className="w-full h-auto max-h-[50vh] object-contain relative z-0 print:max-h-none" 
                         />
                         <button 
                             onClick={onClick}
-                            className="absolute top-2 right-2 bg-white/90 p-2 rounded-full hover:bg-white text-charcoal shadow-sm backdrop-blur-sm transition-transform active:scale-95 z-10"
+                            className="absolute top-2 right-2 bg-white/90 p-2 rounded-full hover:bg-white text-charcoal shadow-sm backdrop-blur-sm transition-transform active:scale-95 z-10 no-print"
                             aria-label="Close"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -89,7 +89,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                             </svg>
                         </button>
                     </div>
-                    <div className="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col min-h-0">
+                    <div className="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col min-h-0 print-remove-scroll">
                         <div className="flex justify-between items-start mb-2 shrink-0">
                             <div>
                                 <h3 className="text-lg md:text-xl font-bold text-charcoal leading-tight">{name}</h3>
@@ -100,7 +100,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                             <span className="text-[10px] md:text-xs text-gray-400 whitespace-nowrap ml-2 pt-1 font-mono">{dateStr}</span>
                         </div>
                         
-                        <div className="overflow-y-auto min-h-0 mb-4 pr-1">
+                        <div className="overflow-y-auto min-h-0 mb-4 pr-1 print-remove-scroll">
                             <p className="text-sm text-gray-600 font-serif leading-relaxed">
                                 {description}
                             </p>

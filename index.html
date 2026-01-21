@@ -72,32 +72,58 @@
         }
 
         @media print {
+            /* Hide everything by default */
+            body * {
+                visibility: hidden;
+            }
+            
+            /* Reset body */
             body, html {
-                position: static;
-                overflow: visible;
-                height: auto;
                 background: white !important;
+                height: auto;
+                overflow: visible;
             }
-            #root, header, footer, .backdrop-blur-sm {
-                display: none !important;
+
+            /* Make the card visible */
+            .print-container, .print-container * {
+                visibility: visible;
             }
+
+            /* Style the card for print */
             .print-container {
+                position: absolute !important;
+                left: 50% !important;
+                top: 20px !important;
+                transform: translateX(-50%) !important;
+                width: 400px !important; /* Standard card-ish width */
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                
+                border: 2px solid #36454F !important; /* Charcoal border */
+                border-radius: 12px !important;
+                box-shadow: none !important;
+                background: white !important;
+                
+                /* Ensure content flows nicely */
                 display: block !important;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                visibility: visible !important;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
             }
-            .print-container * {
-                visibility: visible !important;
+
+            /* Utilities to fix layout during print */
+            .print-remove-scroll {
+                overflow: visible !important;
+                height: auto !important;
+                max-height: none !important;
+                flex: none !important;
+                display: block !important;
             }
+
             .no-print {
                 display: none !important;
             }
-            /* Reset shadows and backgrounds for cleaner print */
-            .bg-white { background: white !important; border: 1px solid #eee !important; }
-            .shadow-2xl { shadow: none !important; }
         }
     </style>
 </head>
