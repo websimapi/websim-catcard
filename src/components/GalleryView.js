@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { getCards, subscribeToCards, deleteCard } from '../utils/storage.js';
-import { Card } from './Card.js';
+window.GalleryView = function() {
+    const { useEffect, useState } = window.React;
+    const { getCards, subscribeToCards, deleteCard } = window.Storage;
+    const Card = window.Card;
 
-export function GalleryView() {
     const [cards, setCards] = useState([]);
     const [filter, setFilter] = useState('');
     const [selectedCard, setSelectedCard] = useState(null);
@@ -16,11 +16,9 @@ export function GalleryView() {
         });
 
         // Subscription for real-time updates
-        const sub = subscribeToCards((data) => {
+        subscribeToCards((data) => {
             setCards(data);
         });
-
-        return () => {}; // Cleanup not strictly needed for websim usually, but good practice
     }, []);
 
     const handleDelete = async (id) => {

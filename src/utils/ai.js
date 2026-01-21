@@ -1,4 +1,6 @@
-export async function generateCatDescription(catType, details) {
+window.AI = {};
+
+window.AI.generateCatDescription = async function(catType, details) {
     const systemPrompt = `You are a creative writer for a "Cute Cat Card" generator. 
     Your goal is to create a short, whimsical personality profile for a cat based on its breed and user-provided traits.
     
@@ -28,9 +30,9 @@ export async function generateCatDescription(catType, details) {
         console.error("AI Text Generation Failed:", error);
         throw new Error("Failed to generate cat details.");
     }
-}
+};
 
-export async function generateCatImage(visualPrompt) {
+window.AI.generateCatImage = async function(visualPrompt) {
     try {
         const result = await websim.imageGen({
             prompt: visualPrompt,
@@ -43,4 +45,4 @@ export async function generateCatImage(visualPrompt) {
         console.error("AI Image Generation Failed:", error);
         throw new Error("Failed to generate cat image.");
     }
-}
+};

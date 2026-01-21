@@ -1,8 +1,3 @@
-import React, { useState } from 'react';
-import { generateCatDescription, generateCatImage } from '../utils/ai.js';
-import { saveCard } from '../utils/storage.js';
-import { Card } from './Card.js';
-
 const CAT_BREEDS = [
     "Persian", "Siamese", "Maine Coon", "British Shorthair", 
     "Ragdoll", "Bengal", "Scottish Fold", "Sphynx", 
@@ -10,7 +5,12 @@ const CAT_BREEDS = [
     "Norwegian Forest", "Bombay", "Munchkin"
 ];
 
-export function CreateView({ onSaved }) {
+window.CreateView = function({ onSaved }) {
+    const { useState } = window.React;
+    const { generateCatDescription, generateCatImage } = window.AI;
+    const { saveCard } = window.Storage;
+    const Card = window.Card;
+
     const [breed, setBreed] = useState(CAT_BREEDS[0]);
     const [details, setDetails] = useState("");
     const [loadingStep, setLoadingStep] = useState(0); // 0: Idle, 1: Text, 2: Image, 3: Saving

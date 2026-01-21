@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { CreateView } from './components/CreateView.js';
-import { GalleryView } from './components/GalleryView.js';
+window.App = function() {
+    const { useState } = window.React;
+    const CreateView = window.CreateView;
+    const GalleryView = window.GalleryView;
 
-export default function App() {
     const [view, setView] = useState('create'); // 'create' | 'gallery'
 
     return (

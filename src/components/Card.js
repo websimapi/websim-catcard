@@ -1,6 +1,5 @@
-import React from 'react';
-
-export function Card({ data, expanded = false, onClick, onDelete }) {
+window.Card = function({ data, expanded = false, onClick, onDelete }) {
+    const React = window.React;
     const { name, breed, description, imageUrl, created_at } = data;
     
     const dateStr = new Date(created_at).toLocaleDateString();
