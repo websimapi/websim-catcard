@@ -58,34 +58,37 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
     if (expanded) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" onClick={onClick}>
-                <div className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full transform transition-all scale-100" onClick={e => e.stopPropagation()}>
-                    <div className="relative">
-                        <img src={imageUrl} alt={name} className="w-full h-80 object-cover bg-lavender" />
+                <div 
+                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100" 
+                    onClick={e => e.stopPropagation()}
+                >
+                    <div className="relative shrink-0">
+                        <img src={imageUrl} alt={name} className="w-full h-64 md:h-80 object-cover bg-lavender" />
                         <button 
                             onClick={onClick}
-                            className="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white text-charcoal font-bold"
+                            className="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white text-charcoal font-bold shadow-sm"
                         >
                             ✕
                         </button>
                     </div>
-                    <div className="p-6">
+                    <div className="p-4 md:p-6 overflow-y-auto">
                         <div className="flex justify-between items-start mb-2">
                             <div>
-                                <h3 className="text-2xl font-bold text-charcoal">{name}</h3>
+                                <h3 className="text-xl md:text-2xl font-bold text-charcoal">{name}</h3>
                                 <span className="inline-block bg-peach text-xs font-semibold px-2 py-1 rounded-full text-charcoal mt-1">
                                     {breed}
                                 </span>
                             </div>
-                            <span className="text-xs text-gray-400">{dateStr}</span>
+                            <span className="text-xs text-gray-400 whitespace-nowrap ml-2">{dateStr}</span>
                         </div>
-                        <p className="text-gray-600 font-serif leading-relaxed mb-6">
+                        <p className="text-sm md:text-base text-gray-600 font-serif leading-relaxed mb-6">
                             {description}
                         </p>
                         
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 mt-auto">
                             <button 
                                 onClick={handleDownload}
-                                className="flex-1 bg-coral text-white py-2 rounded-lg font-bold text-center hover:bg-orange-600 transition-colors"
+                                className="flex-1 bg-coral text-white py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-600 transition-colors shadow-sm"
                             >
                                 Download Art
                             </button>

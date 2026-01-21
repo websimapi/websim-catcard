@@ -79,12 +79,12 @@ window.CreateView = function({ onSaved }) {
 
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
                 
                 {/* Input Section */}
-                <div className="space-y-6 bg-white p-6 rounded-2xl shadow-sm border border-orange-50">
+                <div className="space-y-4 md:space-y-6 bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-orange-50">
                     <div>
-                        <h2 className="text-2xl font-bold text-charcoal mb-4">Create New Card</h2>
+                        <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-4">Create New Card</h2>
                         <label className="block text-sm font-semibold text-gray-600 mb-2">Cat Type</label>
                         <div className="relative mb-4">
                             <select 

@@ -11,24 +11,25 @@ window.App = function() {
             <header className="bg-white shadow-sm sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                     <div 
-                        className="flex items-center gap-2 cursor-pointer" 
+                        className="flex items-center gap-2 cursor-pointer shrink-0" 
                         onClick={() => setView('create')}
                     >
                         <span className="text-2xl">🐱</span>
-                        <h1 className="text-xl font-bold tracking-tight text-charcoal">Cute Cat Cards</h1>
+                        <h1 className="hidden sm:block text-xl font-bold tracking-tight text-charcoal">Cute Cat Cards</h1>
+                        <h1 className="sm:hidden text-lg font-bold tracking-tight text-charcoal">Cat Cards</h1>
                     </div>
                     
                     <nav className="flex items-center gap-1 md:gap-4">
                         <button 
                             onClick={() => setView('create')}
-                            className={`px-4 py-2 rounded-full font-semibold transition-colors
+                            className={`px-3 md:px-4 py-2 text-sm md:text-base rounded-full font-semibold transition-colors
                                 ${view === 'create' ? 'bg-lavender text-charcoal' : 'text-gray-500 hover:bg-gray-50'}`}
                         >
                             Create
                         </button>
                         <button 
                             onClick={() => setView('gallery')}
-                            className={`px-4 py-2 rounded-full font-semibold transition-colors
+                            className={`px-3 md:px-4 py-2 text-sm md:text-base rounded-full font-semibold transition-colors
                                 ${view === 'gallery' ? 'bg-lavender text-charcoal' : 'text-gray-500 hover:bg-gray-50'}`}
                         >
                             Collection
