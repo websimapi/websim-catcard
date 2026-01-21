@@ -1,13 +1,28 @@
 window.Card = function({ data, expanded = false, onClick, onDelete }) {
     const React = window.React;
+    const { useState } = React;
     const { name, breed, description, imageUrl, created_at } = data;
+    
+    const [showPrintMenu, setShowPrintMenu] = useState(false);
+    const [printMode, setPrintMode] = useState('card'); // 'card' | 'image'
     
     const dateStr = new Date(created_at).toLocaleDateString();
 
-    const handlePrint = (e) => {
+    const handlePrintClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        window.print();
+        setShowPrintMenu(true);
+    };
+
+    const confirmPrint = (mode) => {
+        setPrintMode(mode);
+        // Delay slightly to allow React to update the DOM with the new class before printing
+        setTimeout(() => {
+            window.print();
+            // Don't auto-close, let user decide or close if they click away. 
+            // Often print dialog blocks JS, so this runs after print dialog closes in some browsers.
+            setShowPrintMenu(false); 
+        }, 100);
     };
 
     const handleDownload = async (e) => {
@@ -64,11 +79,59 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
     if (expanded) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm print:bg-transparent print:p-0 print:block" onClick={onClick}>
+                
+                {/* Print Settings Modal */}
+                {showPrintMenu && (
+                    <div className="absolute inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm no-print" onClick={(e) => {
+                        e.stopPropagation();
+                        setShowPrintMenu(false);
+                    }}>
+                        <div className="bg-white rounded-2xl p-6 shadow-2xl w-80 max-w-[90%] flex flex-col gap-4 animate-in fade-in zoom-in duration-200 border border-gray-100" onClick={e => e.stopPropagation()}>
+                            <div className="text-center">
+                                <div className="text-4xl mb-2">🖨️</div>
+                                <h3 className="text-xl font-bold text-charcoal">Print Options</h3>
+                                <p className="text-xs text-gray-400">Choose how you want to print</p>
+                            </div>
+                            
+                            <div className="flex flex-col gap-3 mt-2">
+                                <button 
+                                    onClick={() => confirmPrint('card')}
+                                    className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-lavender hover:border-lavender hover:shadow-md transition-all group text-left relative overflow-hidden"
+                                >
+                                    <span className="text-2xl z-10">🃏</span>
+                                    <div className="z-10">
+                                        <div className="font-bold text-charcoal text-sm">Card Mode</div>
+                                        <div className="text-[10px] text-gray-500">Includes details & description</div>
+                                    </div>
+                                </button>
+                                
+                                <button 
+                                    onClick={() => confirmPrint('image')}
+                                    className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-peach hover:border-peach hover:shadow-md transition-all group text-left relative overflow-hidden"
+                                >
+                                    <span className="text-2xl z-10">🖼️</span>
+                                    <div className="z-10">
+                                        <div className="font-bold text-charcoal text-sm">Image Only</div>
+                                        <div className="text-[10px] text-gray-500">Full page artwork</div>
+                                    </div>
+                                </button>
+                            </div>
+
+                            <button 
+                                onClick={() => setShowPrintMenu(false)}
+                                className="mt-2 py-2 text-gray-400 text-sm hover:text-gray-600 font-semibold hover:bg-gray-50 rounded-lg transition-colors"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 <div 
-                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100 print-container print-remove-scroll" 
+                    className={`bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100 print-container print-remove-scroll ${printMode === 'image' ? 'print-layout-image' : ''}`}
                     onClick={e => e.stopPropagation()}
                 >
-                    <div className="relative shrink-0 flex items-center justify-center overflow-hidden" style={{
+                    <div className="relative shrink-0 flex items-center justify-center overflow-hidden image-wrapper" style={{
                         backgroundImage: 'url("cat_paw_pattern.png")',
                         backgroundSize: '120px',
                         backgroundRepeat: 'repeat'
@@ -89,7 +152,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                             </svg>
                         </button>
                     </div>
-                    <div className="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col min-h-0 print-remove-scroll">
+                    <div className="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col min-h-0 print-remove-scroll print-text-content">
                         <div className="flex justify-between items-start mb-2 shrink-0">
                             <div>
                                 <h3 className="text-lg md:text-xl font-bold text-charcoal leading-tight">{name}</h3>
@@ -114,7 +177,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                                 💾 Download
                             </button>
                             <button 
-                                onClick={handlePrint}
+                                onClick={handlePrintClick}
                                 className="flex-1 min-w-[120px] bg-coral text-white py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-600 transition-colors shadow-sm"
                             >
                                 🖨️ Print Card
