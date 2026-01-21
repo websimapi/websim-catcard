@@ -75,87 +75,86 @@ window.CreateView = function({ onSaved }) {
     };
 
     return (
-        <div className="h-full flex flex-col p-4 md:p-6 overflow-hidden">
-            {/* Mobile Tabs */}
-            <div className="md:hidden flex bg-white rounded-xl p-1 mb-4 shrink-0 shadow-sm border border-gray-100">
+        <div className="h-full flex flex-col p-3 md:p-6 overflow-hidden">
+            {/* Mobile Tabs - Compact */}
+            <div className="md:hidden flex bg-white rounded-xl p-1 mb-3 shrink-0 shadow-sm border border-gray-100">
                 <button 
                     onClick={() => setActiveTab('edit')}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'edit' ? 'bg-lavender text-charcoal shadow-sm' : 'text-gray-400'}`}
+                    className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'edit' ? 'bg-lavender text-charcoal shadow-sm' : 'text-gray-400'}`}
                 >
                     ✏️ Edit
                 </button>
                 <button 
                     onClick={() => setActiveTab('preview')}
-                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'preview' ? 'bg-peach text-charcoal shadow-sm' : 'text-gray-400'}`}
+                    className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'preview' ? 'bg-peach text-charcoal shadow-sm' : 'text-gray-400'}`}
                 >
                     🎨 Preview
                 </button>
             </div>
 
-            <div className="flex-1 flex flex-col md:flex-row gap-6 min-h-0">
+            <div className="flex-1 flex flex-col md:flex-row gap-4 md:gap-6 min-h-0 overflow-hidden">
                 
                 {/* Input Section */}
-                <div className={`flex-col md:flex bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-orange-50 overflow-y-auto no-scrollbar md:w-1/2
+                <div className={`flex-col md:flex bg-white p-4 rounded-2xl shadow-sm border border-orange-50 overflow-y-auto no-scrollbar md:w-1/2 overscroll-contain
                     ${activeTab === 'edit' ? 'flex' : 'hidden'}`}>
                     
-                    <div className="space-y-4">
-                        <div>
-                            <h2 className="text-xl font-bold text-charcoal mb-2">Design Your Cat</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="flex flex-col h-full">
+                        <div className="flex-1 space-y-3">
+                            <h2 className="text-lg font-bold text-charcoal">Design Your Cat</h2>
+                            
+                            <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Breed</label>
-                                    <div className="relative mt-1">
-                                        <select 
-                                            value={breed} 
-                                            onChange={(e) => setBreed(e.target.value)}
-                                            className="w-full p-2 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-sm"
-                                        >
-                                            {CAT_BREEDS.map(b => <option key={b} value={b}>{b}</option>)}
-                                        </select>
-                                    </div>
+                                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Breed</label>
+                                    <select 
+                                        value={breed} 
+                                        onChange={(e) => setBreed(e.target.value)}
+                                        className="w-full mt-1 p-2 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-sm"
+                                    >
+                                        {CAT_BREEDS.map(b => <option key={b} value={b}>{b}</option>)}
+                                    </select>
                                 </div>
                                 <div>
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Style</label>
-                                    <div className="relative mt-1">
-                                        <select 
-                                            value={imageStyle} 
-                                            onChange={(e) => setImageStyle(e.target.value)}
-                                            className="w-full p-2 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-sm"
-                                        >
-                                            {IMAGE_STYLES.map(s => <option key={s} value={s}>{s}</option>)}
-                                        </select>
-                                    </div>
+                                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Style</label>
+                                    <select 
+                                        value={imageStyle} 
+                                        onChange={(e) => setImageStyle(e.target.value)}
+                                        className="w-full mt-1 p-2 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-sm"
+                                    >
+                                        {IMAGE_STYLES.map(s => <option key={s} value={s}>{s}</option>)}
+                                    </select>
                                 </div>
+                            </div>
+
+                            <div className="flex-1 flex flex-col min-h-0">
+                                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-1">
+                                    Personality / Details
+                                </label>
+                                <textarea
+                                    value={details}
+                                    onChange={(e) => setDetails(e.target.value.slice(0, 300))}
+                                    placeholder="E.g. Loves lasagna, wears a bow tie..."
+                                    className="w-full h-24 md:h-32 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
+                                />
+                                <div className="text-right text-[10px] text-gray-400 mt-1">{300 - details.length} chars left</div>
                             </div>
                         </div>
 
-                        <div>
-                            <label className="text-xs font-bold text-gray-500 uppercase block mb-1">
-                                Personality Traits <span className="font-normal normal-case text-gray-400">({300 - details.length} left)</span>
-                            </label>
-                            <textarea
-                                value={details}
-                                onChange={(e) => setDetails(e.target.value.slice(0, 300))}
-                                placeholder="E.g. Loves lasagna, wears a bow tie..."
-                                className="w-full h-24 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
-                            />
+                        <div className="mt-4 pt-2 border-t border-gray-50 shrink-0">
+                            <button
+                                onClick={handleGenerate}
+                                disabled={loadingStep > 0}
+                                className={`w-full py-3 rounded-xl font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-2
+                                    ${loadingStep > 0 ? 'bg-gray-100 text-gray-400' : 'bg-coral text-white hover:bg-orange-600'}`}
+                            >
+                                {loadingStep === 0 ? '✨ Generate Cat' : 'Creating Magic...'}
+                            </button>
+                            {error && <div className="text-red-500 text-xs text-center mt-2">{error}</div>}
                         </div>
-
-                        <button
-                            onClick={handleGenerate}
-                            disabled={loadingStep > 0}
-                            className={`w-full py-3 rounded-xl font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-2
-                                ${loadingStep > 0 ? 'bg-gray-100 text-gray-400' : 'bg-coral text-white hover:bg-orange-600'}`}
-                        >
-                            {loadingStep === 0 ? '✨ Generate' : 'Creating...'}
-                        </button>
-                        
-                        {error && <div className="text-red-500 text-xs text-center">{error}</div>}
                     </div>
                 </div>
 
                 {/* Preview Section */}
-                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-4 overflow-y-auto no-scrollbar
+                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-4 overflow-y-auto no-scrollbar overscroll-contain
                     ${activeTab === 'preview' ? 'flex' : 'hidden'}`}>
                     
                     {loadingStep > 0 ? (

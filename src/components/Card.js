@@ -114,22 +114,24 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
     return (
         <div 
             onClick={onClick}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border border-transparent hover:border-peach group"
+            className="h-full bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border border-transparent hover:border-peach group flex flex-col"
         >
-            <div className="aspect-square w-full overflow-hidden bg-lavender">
+            <div className="aspect-square w-full shrink-0 overflow-hidden bg-lavender relative">
                 <img 
                     src={imageUrl} 
                     alt={name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                 />
             </div>
-            <div className="p-4">
-                <h3 className="font-bold text-lg text-charcoal truncate">{name}</h3>
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{breed}</p>
-                <p className="text-sm text-gray-600 font-serif line-clamp-2">
-                    {description}
-                </p>
+            <div className="p-4 flex flex-col flex-1 min-h-0">
+                <h3 className="font-bold text-lg text-charcoal truncate shrink-0">{name}</h3>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2 shrink-0">{breed}</p>
+                <div className="flex-1 overflow-hidden relative">
+                    <p className="text-sm text-gray-600 font-serif absolute inset-0 line-clamp-3 md:line-clamp-4">
+                        {description}
+                    </p>
+                </div>
             </div>
         </div>
     );
