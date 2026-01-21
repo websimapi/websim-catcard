@@ -6,20 +6,52 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
 
     const handleDownload = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
+        
+        const btn = e.currentTarget;
+        const originalText = btn.innerText;
+        btn.innerText = "Preparing...";
+        btn.disabled = true;
+
         try {
-            const response = await fetch(imageUrl);
+            // Fetch the image as a blob
+            // Using a cache-buster can help with some browser CORS caching quirks
+            const fetchUrl = imageUrl.includes('?') ? `${imageUrl}&t=${Date.now()}` : `${imageUrl}?t=${Date.now()}`;
+            const response = await fetch(fetchUrl, {
+                mode: 'cors',
+                credentials: 'omit'
+            });
+
+            if (!response.ok) throw new Error('Failed to fetch image');
+            
             const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
+            const blobUrl = window.URL.createObjectURL(blob);
+            
+            // Create a temporary link to trigger download
             const link = document.createElement('a');
-            link.href = url;
-            link.download = `${name.replace(/\s+/g, '_')}_card.png`;
+            link.href = blobUrl;
+            // Clean filename: remove special characters, replace spaces with underscores
+            const safeName = name.replace(/[^\w\s-]/gi, '').trim().replace(/\s+/g, '_');
+            link.download = `${safeName}_cat_card.png`;
+            
+            // Append to body, click, and cleanup
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
+            
+            // Release the blob URL after a short delay
+            setTimeout(() => window.URL.revokeObjectURL(blobUrl), 100);
         } catch (err) {
-            console.error('Download failed:', err);
-            window.open(imageUrl, '_blank');
+            console.error('Blob download failed:', err);
+            // Fallback: standard anchor download attribute (might still open in new tab if CORS prevents blob)
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.target = "_blank";
+            link.download = `${name.replace(/\s+/g, '_')}_card.png`;
+            link.click();
+        } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
         }
     };
 
