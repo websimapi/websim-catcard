@@ -2,7 +2,7 @@ const CAT_BREEDS = [
     "Persian", "Siamese", "Maine Coon", "British Shorthair", 
     "Ragdoll", "Bengal", "Scottish Fold", "Sphynx", 
     "Tabby", "Calico", "Tuxedo", "Orange Tabby", "Russian Blue",
-    "Norwegian Forest", "Bombay", "Munchkin"
+    "Norwegian Forest", "Bombay", "Munchkin", "Ural Rex"
 ];
 
 const IMAGE_STYLES = [
