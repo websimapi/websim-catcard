@@ -126,9 +126,9 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
             </div>
             <div className="p-4 flex flex-col flex-1 min-h-0">
                 <h3 className="font-bold text-lg text-charcoal truncate shrink-0">{name}</h3>
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2 shrink-0">{breed}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1 shrink-0">{breed}</p>
                 <div className="flex-1 overflow-hidden relative">
-                    <p className="text-sm text-gray-600 font-serif absolute inset-0 line-clamp-3 md:line-clamp-4">
+                    <p className="text-sm text-gray-600 font-serif absolute inset-0 line-clamp-6 md:line-clamp-8 leading-relaxed">
                         {description}
                     </p>
                 </div>

@@ -49,7 +49,7 @@ window.GalleryView = function() {
     return (
         <div className="h-full flex flex-col overflow-hidden bg-cream/30">
             {/* Header */}
-            <div className="flex justify-between items-center px-6 py-4 shrink-0 gap-4">
+            <div className="flex justify-between items-center px-6 py-2 shrink-0 gap-4">
                 <h2 className="text-xl font-bold text-charcoal">Collection <span className="text-gray-400 text-sm font-normal ml-1">{cards.length}</span></h2>
                 <div className="relative w-40 md:w-64">
                     <input 
@@ -69,7 +69,7 @@ window.GalleryView = function() {
                 className="flex-1 flex flex-row items-center gap-6 overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-8 pb-4 no-scrollbar overscroll-contain"
             >
                 {filteredCards.map(card => (
-                    <div key={card.id} className="snap-center shrink-0 w-[85vw] max-w-sm h-full max-h-[60vh] md:max-h-[70vh] flex flex-col">
+                    <div key={card.id} className="snap-center shrink-0 w-[85vw] max-w-sm h-[85%] md:h-[90%] flex flex-col">
                         <Card 
                             data={card} 
                             onClick={() => setSelectedCard(card)} 

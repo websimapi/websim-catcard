@@ -45,7 +45,7 @@ window.App = function() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-white py-3 border-t border-gray-100 shrink-0">
+            <footer className="bg-white py-1 border-t border-gray-100 shrink-0">
                 <div className="text-center text-xs text-gray-400">
                     Made with 🧶 and 🐟 by AI
                 </div>
