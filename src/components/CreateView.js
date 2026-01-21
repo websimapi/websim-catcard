@@ -5,6 +5,14 @@ const CAT_BREEDS = [
     "Norwegian Forest", "Bombay", "Munchkin"
 ];
 
+const IMAGE_STYLES = [
+    "Digital Painting", "Hyper Realistic", "Photorealistic", "3D Render", 
+    "Concept Art", "Anime / Manga", "Cartoon / Comic Style", "Watercolor", 
+    "Oil Painting", "Pencil Sketch / Line Art", "Low Poly", 
+    "Isometric Illustration", "Surreal / Dreamlike", "Fantasy Art", 
+    "Sci-Fi Illustration", "Minimalist", "Matte Painting", "Pixel Art"
+];
+
 window.CreateView = function({ onSaved }) {
     const { useState } = window.React;
     const { generateCatDescription, generateCatImage } = window.AI;
@@ -12,6 +20,7 @@ window.CreateView = function({ onSaved }) {
     const Card = window.Card;
 
     const [breed, setBreed] = useState(CAT_BREEDS[0]);
+    const [imageStyle, setImageStyle] = useState(IMAGE_STYLES[0]);
     const [details, setDetails] = useState("");
     const [loadingStep, setLoadingStep] = useState(0); // 0: Idle, 1: Text, 2: Image, 3: Saving
     const [generatedData, setGeneratedData] = useState(null);
@@ -26,7 +35,7 @@ window.CreateView = function({ onSaved }) {
 
         try {
             // Step 1: Text
-            const textData = await generateCatDescription(breed, details);
+            const textData = await generateCatDescription(breed, details, imageStyle);
             setGeneratedData({ ...textData, breed, imageUrl: null }); // Partial state
             
             setLoadingStep(2);
@@ -65,13 +74,25 @@ window.CreateView = function({ onSaved }) {
                     <div>
                         <h2 className="text-2xl font-bold text-charcoal mb-4">Create New Card</h2>
                         <label className="block text-sm font-semibold text-gray-600 mb-2">Cat Type</label>
-                        <div className="relative">
+                        <div className="relative mb-4">
                             <select 
                                 value={breed} 
                                 onChange={(e) => setBreed(e.target.value)}
                                 className="w-full p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-charcoal appearance-none cursor-pointer"
                             >
                                 {CAT_BREEDS.map(b => <option key={b} value={b}>🐱 {b}</option>)}
+                            </select>
+                            <div className="absolute right-3 top-3 pointer-events-none text-gray-500">▼</div>
+                        </div>
+
+                        <label className="block text-sm font-semibold text-gray-600 mb-2">Image Style</label>
+                        <div className="relative">
+                            <select 
+                                value={imageStyle} 
+                                onChange={(e) => setImageStyle(e.target.value)}
+                                className="w-full p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral text-charcoal appearance-none cursor-pointer"
+                            >
+                                {IMAGE_STYLES.map(s => <option key={s} value={s}>🎨 {s}</option>)}
                             </select>
                             <div className="absolute right-3 top-3 pointer-events-none text-gray-500">▼</div>
                         </div>

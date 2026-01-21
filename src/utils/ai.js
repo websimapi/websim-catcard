@@ -1,6 +1,6 @@
 window.AI = {};
 
-window.AI.generateCatDescription = async function(catType, details) {
+window.AI.generateCatDescription = async function(catType, details, imageStyle) {
     const systemPrompt = `You are a creative writer for a "Cute Cat Card" generator. 
     Your goal is to create a short, whimsical personality profile for a cat based on its breed and user-provided traits.
     
@@ -8,11 +8,12 @@ window.AI.generateCatDescription = async function(catType, details) {
     {
         "name": "A cute name for the cat",
         "description": "2-3 sentences describing personality, habits, or magical traits.",
-        "visual_prompt": "A detailed image generation prompt for a cute, illustrative style cat portrait. Include breed features, accessories, and setting mentioned. Style: Soft, warm, storybook illustration."
+        "visual_prompt": "A detailed image generation prompt for a cute cat portrait in the specified style. Include breed features, accessories, and setting mentioned. Style: ${imageStyle}."
     }
     `;
 
     const userMessage = `Cat Breed: ${catType}. 
+    Requested Artistic Style: ${imageStyle}.
     Details/Traits: ${details || "Surprise me with something cute!"}.
     Make it adorable and unique.`;
 
