@@ -95,14 +95,14 @@ window.CreateView = function({ onSaved }) {
             <div className="flex-1 flex flex-col md:flex-row gap-4 md:gap-6 min-h-0 overflow-hidden">
                 
                 {/* Input Section */}
-                <div className={`flex-col md:flex bg-white p-4 rounded-2xl shadow-sm border border-orange-50 overflow-y-auto no-scrollbar md:w-1/2 overscroll-contain
+                <div className={`flex-col md:flex bg-white p-4 rounded-2xl shadow-sm border border-orange-50 overflow-hidden md:w-1/2
                     ${activeTab === 'edit' ? 'flex' : 'hidden'}`}>
                     
-                    <div className="flex flex-col h-full">
-                        <div className="flex-1 space-y-3">
-                            <h2 className="text-lg font-bold text-charcoal">Design Your Cat</h2>
+                    <div className="flex flex-col h-full min-h-0">
+                        <div className="flex-1 flex flex-col space-y-3 min-h-0">
+                            <h2 className="text-lg font-bold text-charcoal shrink-0">Design Your Cat</h2>
                             
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-2 gap-3 shrink-0">
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Breed</label>
                                     <select 
@@ -133,13 +133,13 @@ window.CreateView = function({ onSaved }) {
                                     value={details}
                                     onChange={(e) => setDetails(e.target.value.slice(0, 300))}
                                     placeholder="E.g. Loves lasagna, wears a bow tie..."
-                                    className="w-full h-24 md:h-32 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
+                                    className="w-full flex-1 min-h-0 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
                                 />
-                                <div className="text-right text-[10px] text-gray-400 mt-1">{300 - details.length} chars left</div>
+                                <div className="text-right text-[10px] text-gray-400 mt-1 shrink-0">{300 - details.length} chars left</div>
                             </div>
                         </div>
 
-                        <div className="mt-4 pt-2 border-t border-gray-50 shrink-0">
+                        <div className="mt-2 pt-2 border-t border-gray-50 shrink-0">
                             <button
                                 onClick={handleGenerate}
                                 disabled={loadingStep > 0}
@@ -154,7 +154,7 @@ window.CreateView = function({ onSaved }) {
                 </div>
 
                 {/* Preview Section */}
-                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-4 overflow-y-auto no-scrollbar overscroll-contain
+                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-4 overflow-hidden
                     ${activeTab === 'preview' ? 'flex' : 'hidden'}`}>
                     
                     {loadingStep > 0 ? (
@@ -167,9 +167,11 @@ window.CreateView = function({ onSaved }) {
                             </h3>
                         </div>
                     ) : generatedData ? (
-                        <div className="w-full max-w-sm space-y-3">
-                            <Card data={{ ...generatedData, created_at: new Date().toISOString() }} />
-                            <div className="flex gap-3">
+                        <div className="w-full max-w-sm h-full flex flex-col gap-3 min-h-0">
+                            <div className="flex-1 min-h-0">
+                                <Card data={{ ...generatedData, created_at: new Date().toISOString() }} />
+                            </div>
+                            <div className="flex gap-3 shrink-0">
                                 <button 
                                     onClick={() => { setGeneratedData(null); setActiveTab('edit'); }}
                                     className="flex-1 py-2 text-gray-500 font-bold hover:bg-gray-200 rounded-lg text-sm"
