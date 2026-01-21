@@ -51,7 +51,7 @@ window.CreateView = function({ onSaved }) {
             const textData = await generateCatDescription(breed, details, imageStyle);
             setGeneratedData({ ...textData, breed, imageUrl: null });
             setLoadingStep(2);
-            const imageUrl = await generateCatImage(textData.visual_prompt);
+            const imageUrl = await generateCatImage(textData.visual_prompt, imageStyle);
             setGeneratedData(prev => ({ ...prev, imageUrl }));
             setLoadingStep(0);
         } catch (err) {

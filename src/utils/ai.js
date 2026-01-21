@@ -33,10 +33,20 @@ window.AI.generateCatDescription = async function(catType, details, imageStyle) 
     }
 };
 
-window.AI.generateCatImage = async function(visualPrompt) {
+window.AI.generateCatImage = async function(visualPrompt, style = "") {
     try {
+        let finalPrompt = visualPrompt;
+
+        // "Sandwich" the prompt with heavy weighting for Coloring Book style
+        // to ensure the model strictly adheres to black and white line art.
+        if (style === "Coloring Book (B&W Outline)") {
+            const prefix = "coloring book page, black and white, thick clean black outlines, white background, no shading, no greyscale, no color, ";
+            const suffix = ", line art, monochrome, kids coloring page style, vector lines, high contrast, crisp lines";
+            finalPrompt = `${prefix}${visualPrompt}${suffix}`;
+        }
+
         const result = await websim.imageGen({
-            prompt: visualPrompt,
+            prompt: finalPrompt,
             aspect_ratio: "1:1",
             width: 512,
             height: 512
