@@ -116,7 +116,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
             onClick={onClick}
             className="h-full bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border border-transparent hover:border-peach group flex flex-col"
         >
-            <div className="flex-[3] min-h-0 w-full overflow-hidden bg-lavender relative">
+            <div className="aspect-square w-full shrink-0 shrink flex-1 overflow-hidden bg-lavender relative min-h-0">
                 <img 
                     src={imageUrl} 
                     alt={name} 
@@ -124,11 +124,11 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                     loading="lazy"
                 />
             </div>
-            <div className="p-3 md:p-4 flex flex-col flex-1 min-h-0 overflow-hidden">
-                <h3 className="font-bold text-base md:text-lg text-charcoal truncate shrink-0">{name}</h3>
-                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider mb-1 shrink-0">{breed}</p>
-                <div className="flex-1 overflow-hidden relative">
-                    <p className="text-xs md:text-sm text-gray-600 font-serif absolute inset-0 line-clamp-4 md:line-clamp-6 leading-relaxed">
+            <div className="p-3 md:p-4 flex flex-col flex-1 min-h-0 shrink-0">
+                <h3 className="font-bold text-lg text-charcoal truncate shrink-0">{name}</h3>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1 shrink-0">{breed}</p>
+                <div className="flex-1 overflow-hidden relative min-h-[2.5rem]">
+                    <p className="text-sm text-gray-600 font-serif absolute inset-0 line-clamp-6 md:line-clamp-8 leading-relaxed">
                         {description}
                     </p>
                 </div>

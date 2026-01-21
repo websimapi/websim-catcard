@@ -49,9 +49,9 @@ window.GalleryView = function() {
     return (
         <div className="h-full flex flex-col overflow-hidden bg-cream/30">
             {/* Header */}
-            <div className="flex justify-between items-center px-6 py-2 shrink-0 gap-4">
-                <h2 className="text-xl font-bold text-charcoal">Collection <span className="text-gray-400 text-sm font-normal ml-1">{cards.length}</span></h2>
-                <div className="relative w-40 md:w-64">
+            <div className="flex justify-between items-center px-4 md:px-6 py-2 shrink-0 gap-4">
+                <h2 className="text-lg md:text-xl font-bold text-charcoal">Collection <span className="text-gray-400 text-sm font-normal ml-1">{cards.length}</span></h2>
+                <div className="relative w-32 md:w-64">
                     <input 
                         type="text" 
                         placeholder="Search..." 

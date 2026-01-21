@@ -75,34 +75,34 @@ window.CreateView = function({ onSaved }) {
     };
 
     return (
-        <div className="h-full flex flex-col p-3 md:p-6 overflow-hidden">
+        <div className="h-full flex flex-col p-2 md:p-4 overflow-hidden">
             {/* Mobile Tabs - Compact */}
-            <div className="md:hidden flex bg-white rounded-xl p-1 mb-3 shrink-0 shadow-sm border border-gray-100">
+            <div className="md:hidden flex bg-white rounded-xl p-1 mb-2 shrink-0 shadow-sm border border-gray-100">
                 <button 
                     onClick={() => setActiveTab('edit')}
-                    className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'edit' ? 'bg-lavender text-charcoal shadow-sm' : 'text-gray-400'}`}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'edit' ? 'bg-lavender text-charcoal shadow-sm' : 'text-gray-400'}`}
                 >
                     ✏️ Edit
                 </button>
                 <button 
                     onClick={() => setActiveTab('preview')}
-                    className={`flex-1 py-1.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'preview' ? 'bg-peach text-charcoal shadow-sm' : 'text-gray-400'}`}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'preview' ? 'bg-peach text-charcoal shadow-sm' : 'text-gray-400'}`}
                 >
                     🎨 Preview
                 </button>
             </div>
 
-            <div className="flex-1 flex flex-col md:flex-row gap-4 md:gap-6 min-h-0 overflow-hidden">
+            <div className="flex-1 flex flex-col md:flex-row gap-3 md:gap-6 min-h-0 overflow-hidden">
                 
                 {/* Input Section */}
-                <div className={`flex-col md:flex bg-white p-4 rounded-2xl shadow-sm border border-orange-50 overflow-hidden md:w-1/2
+                <div className={`flex-col md:flex bg-white p-3 md:p-4 rounded-2xl shadow-sm border border-orange-50 overflow-y-auto no-scrollbar md:w-1/2 overscroll-contain
                     ${activeTab === 'edit' ? 'flex' : 'hidden'}`}>
                     
-                    <div className="flex flex-col h-full min-h-0">
-                        <div className="flex-1 flex flex-col space-y-3 min-h-0">
-                            <h2 className="text-lg font-bold text-charcoal shrink-0">Design Your Cat</h2>
+                    <div className="flex flex-col h-full">
+                        <div className="flex-1 space-y-2 md:space-y-3">
+                            <h2 className="text-lg font-bold text-charcoal">Design Your Cat</h2>
                             
-                            <div className="grid grid-cols-2 gap-3 shrink-0">
+                            <div className="grid grid-cols-2 gap-3">
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Breed</label>
                                     <select 
@@ -133,13 +133,13 @@ window.CreateView = function({ onSaved }) {
                                     value={details}
                                     onChange={(e) => setDetails(e.target.value.slice(0, 300))}
                                     placeholder="E.g. Loves lasagna, wears a bow tie..."
-                                    className="w-full flex-1 min-h-0 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
+                                    className="w-full h-24 md:h-32 p-3 bg-mint rounded-lg border-none focus:ring-2 focus:ring-coral resize-none text-sm placeholder-gray-400"
                                 />
-                                <div className="text-right text-[10px] text-gray-400 mt-1 shrink-0">{300 - details.length} chars left</div>
+                                <div className="text-right text-[10px] text-gray-400 mt-1">{300 - details.length} chars left</div>
                             </div>
                         </div>
 
-                        <div className="mt-2 pt-2 border-t border-gray-50 shrink-0">
+                        <div className="mt-4 pt-2 border-t border-gray-50 shrink-0">
                             <button
                                 onClick={handleGenerate}
                                 disabled={loadingStep > 0}
@@ -154,8 +154,8 @@ window.CreateView = function({ onSaved }) {
                 </div>
 
                 {/* Preview Section */}
-                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-4 overflow-hidden
-                    ${activeTab === 'preview' ? 'flex' : 'hidden'}`}>
+                <div className={`flex-col md:flex items-center justify-center bg-gray-50 rounded-2xl md:w-1/2 p-2 md:p-4 overflow-hidden
+                    ${activeTab === 'preview' ? 'flex h-full' : 'hidden'}`}>
                     
                     {loadingStep > 0 ? (
                         <div className="text-center space-y-4">
@@ -167,20 +167,20 @@ window.CreateView = function({ onSaved }) {
                             </h3>
                         </div>
                     ) : generatedData ? (
-                        <div className="w-full max-w-sm h-full flex flex-col gap-3 min-h-0">
-                            <div className="flex-1 min-h-0">
+                        <div className="w-full max-w-sm flex flex-col h-full max-h-full">
+                            <div className="flex-1 min-h-0 flex flex-col justify-center">
                                 <Card data={{ ...generatedData, created_at: new Date().toISOString() }} />
                             </div>
-                            <div className="flex gap-3 shrink-0">
+                            <div className="flex gap-3 mt-3 shrink-0">
                                 <button 
                                     onClick={() => { setGeneratedData(null); setActiveTab('edit'); }}
-                                    className="flex-1 py-2 text-gray-500 font-bold hover:bg-gray-200 rounded-lg text-sm"
+                                    className="flex-1 py-3 text-gray-500 font-bold hover:bg-gray-200 rounded-lg text-sm"
                                 >
                                     Discard
                                 </button>
                                 <button 
                                     onClick={handleSave}
-                                    className="flex-1 py-2 bg-mint text-charcoal font-bold rounded-lg hover:bg-green-100 border border-green-200 text-sm"
+                                    className="flex-1 py-3 bg-mint text-charcoal font-bold rounded-lg hover:bg-green-100 border border-green-200 text-sm"
                                 >
                                     💖 Save
                                 </button>
