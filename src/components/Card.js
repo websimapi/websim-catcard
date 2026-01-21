@@ -62,41 +62,30 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                     className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100" 
                     onClick={e => e.stopPropagation()}
                 >
-                    <div className="relative shrink-0 bg-gray-100 flex items-center justify-center">
-                        <img 
-                            src={imageUrl} 
-                            alt={name} 
-                            className="w-full h-auto max-h-[50vh] object-contain" 
-                        />
+                    <div className="relative shrink-0">
+                        <img src={imageUrl} alt={name} className="w-full h-64 md:h-80 object-cover bg-lavender" />
                         <button 
                             onClick={onClick}
-                            className="absolute top-2 right-2 bg-white/90 p-2 rounded-full hover:bg-white text-charcoal shadow-sm backdrop-blur-sm transition-transform active:scale-95 z-10"
-                            aria-label="Close"
+                            className="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white text-charcoal font-bold shadow-sm"
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
+                            ✕
                         </button>
                     </div>
-                    <div className="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col min-h-0">
-                        <div className="flex justify-between items-start mb-2 shrink-0">
+                    <div className="p-4 md:p-6 overflow-y-auto">
+                        <div className="flex justify-between items-start mb-2">
                             <div>
-                                <h3 className="text-lg md:text-xl font-bold text-charcoal leading-tight">{name}</h3>
-                                <span className="inline-block bg-peach/50 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full text-charcoal mt-1 border border-peach/50">
+                                <h3 className="text-xl md:text-2xl font-bold text-charcoal">{name}</h3>
+                                <span className="inline-block bg-peach text-xs font-semibold px-2 py-1 rounded-full text-charcoal mt-1">
                                     {breed}
                                 </span>
                             </div>
-                            <span className="text-[10px] md:text-xs text-gray-400 whitespace-nowrap ml-2 pt-1 font-mono">{dateStr}</span>
+                            <span className="text-xs text-gray-400 whitespace-nowrap ml-2">{dateStr}</span>
                         </div>
+                        <p className="text-sm md:text-base text-gray-600 font-serif leading-relaxed mb-6">
+                            {description}
+                        </p>
                         
-                        <div className="overflow-y-auto min-h-0 mb-4 pr-1">
-                            <p className="text-sm text-gray-600 font-serif leading-relaxed">
-                                {description}
-                            </p>
-                        </div>
-                        
-                        <div className="flex gap-2 md:gap-3 mt-auto shrink-0 pt-2 border-t border-gray-50">
+                        <div className="flex gap-3 mt-auto">
                             <button 
                                 onClick={handleDownload}
                                 className="flex-1 bg-coral text-white py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-600 transition-colors shadow-sm"
