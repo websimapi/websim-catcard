@@ -52,24 +52,18 @@
             from { transform: translateY(0); }
             to { transform: translateY(-10px); }
         }
-        /* Custom scrollbar */
+        /* No visible scrollbars */
         ::-webkit-scrollbar {
-            width: 8px;
+            display: none;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #FFDAB9; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #FF7F50; 
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
 <body>
-    <div id="root" class="min-h-screen flex items-center justify-center bg-cream">
+    <div id="root" class="h-screen flex items-center justify-center bg-cream overflow-hidden">
         <div class="text-center">
             <div class="text-6xl animate-bounce mb-4">🧶</div>
             <div class="text-xl text-charcoal font-bold">Loading Cat Generator...</div>

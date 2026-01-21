@@ -6,9 +6,9 @@ window.App = function() {
     const [view, setView] = useState('create'); // 'create' | 'gallery'
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="h-screen w-full flex flex-col overflow-hidden bg-cream">
             {/* Header */}
-            <header className="bg-white shadow-sm sticky top-0 z-40">
+            <header className="bg-white shadow-sm shrink-0 z-40">
                 <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
                     <div 
                         className="flex items-center gap-2 cursor-pointer shrink-0" 
@@ -39,14 +39,14 @@ window.App = function() {
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto">
+            <main className="flex-1 min-h-0 relative w-full max-w-6xl mx-auto overflow-hidden">
                 {view === 'create' && <CreateView onSaved={() => setView('gallery')} />}
                 {view === 'gallery' && <GalleryView />}
             </main>
 
             {/* Footer */}
-            <footer className="bg-white py-6 border-t border-gray-100 mt-auto">
-                <div className="text-center text-sm text-gray-400">
+            <footer className="bg-white py-3 border-t border-gray-100 shrink-0">
+                <div className="text-center text-xs text-gray-400">
                     Made with 🧶 and 🐟 by AI
                 </div>
             </footer>
