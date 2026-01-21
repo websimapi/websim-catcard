@@ -24,8 +24,10 @@ window.Storage = {};
 
         const currentUser = await window.websim.getCurrentUser();
         
-        let records = await room.collection(COLLECTION_NAME).getList();
-        let userRecord = records.find(r => r.username === currentUser.username);
+        // Filter by username to ensure we get the correct record from the DB
+        // This is crucial as getList() only returns the latest records by default
+        let records = await room.collection(COLLECTION_NAME).filter({username: currentUser.username}).getList();
+        let userRecord = records[0];
 
         if (!userRecord) {
             userRecord = await room.collection(COLLECTION_NAME).create(INITIAL_DATA);
@@ -36,13 +38,9 @@ window.Storage = {};
     }
 
     window.Storage.getCards = async function() {
+        // Ensure we have a record to work with
         const record = await getUserRecord();
-        const records = await room.collection(COLLECTION_NAME).filter({id: record.id}).getList();
-        if (records.length > 0) {
-            cachedRecord = records[0];
-            return cachedRecord.slot_0 || [];
-        }
-        return [];
+        return record.slot_0 || [];
     };
 
     window.Storage.saveCard = async function(cardData) {
@@ -81,12 +79,17 @@ window.Storage = {};
     window.Storage.subscribeToCards = async function(callback) {
         const currentUser = await window.websim.getCurrentUser();
         
-        return room.collection(COLLECTION_NAME).subscribe((records) => {
-            const myRecord = records.find(r => r.username === currentUser.username);
-            if (myRecord) {
+        // Subscribe specifically to the user's record
+        const unsubscribe = room.collection(COLLECTION_NAME).filter({username: currentUser.username}).subscribe((records) => {
+            if (records && records.length > 0) {
+                const myRecord = records[0];
                 cachedRecord = myRecord;
                 callback(myRecord.slot_0 || []);
+            } else {
+                callback([]);
             }
         });
+
+        return unsubscribe;
     };
 })();

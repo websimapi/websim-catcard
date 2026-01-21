@@ -9,16 +9,30 @@ window.GalleryView = function() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Initial fetch
-        getCards().then(data => {
-            setCards(data);
-            setLoading(false);
-        });
+        let unsubscribe;
 
-        // Subscription for real-time updates
-        subscribeToCards((data) => {
-            setCards(data);
-        });
+        const init = async () => {
+            try {
+                // Initial data load
+                const initialData = await getCards();
+                setCards(initialData);
+                setLoading(false);
+
+                // Set up live subscription
+                unsubscribe = await subscribeToCards((updatedData) => {
+                    setCards(updatedData);
+                });
+            } catch (error) {
+                console.error("Failed to load collection:", error);
+                setLoading(false);
+            }
+        };
+
+        init();
+
+        return () => {
+            if (unsubscribe) unsubscribe();
+        };
     }, []);
 
     const handleDelete = async (id) => {
