@@ -4,6 +4,25 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
     
     const dateStr = new Date(created_at).toLocaleDateString();
 
+    const handleDownload = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${name.replace(/\s+/g, '_')}_card.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error('Download failed:', err);
+            window.open(imageUrl, '_blank');
+        }
+    };
+
     if (expanded) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" onClick={onClick}>
@@ -32,15 +51,12 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                         </p>
                         
                         <div className="flex gap-3">
-                            <a 
-                                href={imageUrl} 
-                                download={`cat_card_${name}.png`}
-                                target="_blank"
-                                rel="noreferrer"
+                            <button 
+                                onClick={handleDownload}
                                 className="flex-1 bg-coral text-white py-2 rounded-lg font-bold text-center hover:bg-orange-600 transition-colors"
                             >
                                 Download Art
-                            </a>
+                            </button>
                             {onDelete && (
                                 <button 
                                     onClick={(e) => {
