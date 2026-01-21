@@ -6,6 +6,7 @@
  */
 
 const COLLECTION_NAME = 'user_storage_v1';
+// Ensure WebsimSocket is instantiated safely
 const room = new WebsimSocket();
 
 const INITIAL_DATA = {
