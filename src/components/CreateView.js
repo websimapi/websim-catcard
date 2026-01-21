@@ -22,7 +22,8 @@ const IMAGE_STYLES = [
     "Concept Art", "Anime / Manga", "Cartoon / Comic Style", "Watercolor", 
     "Oil Painting", "Pencil Sketch / Line Art", "Low Poly", 
     "Isometric Illustration", "Surreal / Dreamlike", "Fantasy Art", 
-    "Sci-Fi Illustration", "Minimalist", "Matte Painting", "Pixel Art"
+    "Sci-Fi Illustration", "Minimalist", "Matte Painting", "Pixel Art",
+    "Coloring Book (B&W Outline)"
 ];
 
 window.CreateView = function({ onSaved }) {

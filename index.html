@@ -70,6 +70,35 @@
             top: 0;
             left: 0;
         }
+
+        @media print {
+            body, html {
+                position: static;
+                overflow: visible;
+                height: auto;
+                background: white !important;
+            }
+            #root, header, footer, .backdrop-blur-sm {
+                display: none !important;
+            }
+            .print-container {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                visibility: visible !important;
+            }
+            .print-container * {
+                visibility: visible !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            /* Reset shadows and backgrounds for cleaner print */
+            .bg-white { background: white !important; border: 1px solid #eee !important; }
+            .shadow-2xl { shadow: none !important; }
+        }
     </style>
 </head>
 <body>

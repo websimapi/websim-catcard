@@ -4,6 +4,12 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
     
     const dateStr = new Date(created_at).toLocaleDateString();
 
+    const handlePrint = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.print();
+    };
+
     const handleDownload = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -59,7 +65,7 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm" onClick={onClick}>
                 <div 
-                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100" 
+                    className="bg-white rounded-2xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col transform transition-all scale-100 print-container" 
                     onClick={e => e.stopPropagation()}
                 >
                     <div className="relative shrink-0 flex items-center justify-center overflow-hidden" style={{
@@ -100,12 +106,18 @@ window.Card = function({ data, expanded = false, onClick, onDelete }) {
                             </p>
                         </div>
                         
-                        <div className="flex gap-2 md:gap-3 mt-auto shrink-0 pt-2 border-t border-gray-50">
+                        <div className="flex flex-wrap gap-2 md:gap-3 mt-auto shrink-0 pt-2 border-t border-gray-50 no-print">
                             <button 
                                 onClick={handleDownload}
-                                className="flex-1 bg-coral text-white py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-600 transition-colors shadow-sm"
+                                className="flex-1 min-w-[120px] bg-peach text-charcoal py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-200 transition-colors shadow-sm"
                             >
-                                Download Art
+                                💾 Download
+                            </button>
+                            <button 
+                                onClick={handlePrint}
+                                className="flex-1 min-w-[120px] bg-coral text-white py-2 md:py-3 rounded-lg font-bold text-center text-sm md:text-base hover:bg-orange-600 transition-colors shadow-sm"
+                            >
+                                🖨️ Print Card
                             </button>
                             {onDelete && (
                                 <button 
